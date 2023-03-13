@@ -40,6 +40,7 @@ public class Movie {
         List<String> genres2 = new ArrayList<>();
         genres2.add("Comedy");
         genres2.add("Romance");
+        genres2.add("Drama");
 
         Movie movie2 = new Movie("B: Avengers", "B: description", genres2);
         movies.add(movie2);
@@ -47,6 +48,7 @@ public class Movie {
         List<String> genres3 = new ArrayList<>();
         genres3.add("Drama");
         genres3.add("Mystery");
+        genres3.add("Thriller");
 
         Movie movie3 = new Movie("C: The Shawshank Redemption", "C: description", genres3);
         movies.add(movie3);
