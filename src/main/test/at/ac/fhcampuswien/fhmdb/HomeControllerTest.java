@@ -23,7 +23,6 @@ class HomeControllerTest {
             controller.searchField = new TextField();
             controller.sortBtn = new Button();
 
-            // add test data
             controller.allMovies = Movie.initializeMovies();
 
             // initialize the controller
@@ -33,12 +32,12 @@ class HomeControllerTest {
         @Test
         public void testSearchByTitle() {
             FxRobot robot = new FxRobot();
-            robot.clickOn(controller.searchField).write("godfather");
+            robot.clickOn(controller.searchField).write("Avengers");
             robot.clickOn(controller.searchBtn);
 
             ObservableList<Movie> items = controller.movieListView.getItems();
             assertEquals(1, items.size());
-            assertEquals("The Godfather", items.get(0).getTitle());
+            assertEquals("Avengers", items.get(0).getTitle());
         }
 
 
@@ -48,6 +47,6 @@ class HomeControllerTest {
             robot.clickOn(controller.searchBtn);
 
             ObservableList<Movie> items = controller.movieListView.getItems();
-            assertEquals(5, items.size());
+            assertEquals(4, items.size());
         }
 }
