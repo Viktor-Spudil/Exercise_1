@@ -37,7 +37,7 @@ class HomeControllerTest {
 
             ObservableList<Movie> items = controller.movieListView.getItems();
             assertEquals(1, items.size());
-            assertEquals("Avengers", items.get(0).getTitle());
+            assertEquals("B: Avengers", items.get(0).getTitle());
         }
 
 
@@ -49,4 +49,11 @@ class HomeControllerTest {
             ObservableList<Movie> items = controller.movieListView.getItems();
             assertEquals(4, items.size());
         }
+        //filter test
+
+        //sort test
+
+
+
+
 }
