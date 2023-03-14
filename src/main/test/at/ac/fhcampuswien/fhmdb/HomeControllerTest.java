@@ -3,8 +3,6 @@ package at.ac.fhcampuswien.fhmdb;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HomeControllerTest {
-    public class HomeControllerTest {
-
         private HomeController controller;
         public List<Movie> allMovies = Movie.initializeMovies();
 
@@ -50,6 +48,17 @@ class HomeControllerTest {
             assertEquals(4, items.size());
         }
         //filter test
+        @Test
+        public void testFilterByGenre() {
+            FxRobot robot = new FxRobot();
+            robot.clickOn(controller.genreComboBox).clickOn("Action");
+            robot.clickOn(controller.searchBtn);
+
+            ObservableList<Movie> items = controller.movieListView.getItems();
+            assertEquals(2, items.size());
+            assertEquals("A: Avengers", items.get(0).getTitle());
+            assertEquals("B: Avengers", items.get(1).getTitle());
+        }
 
         //sort test
 
