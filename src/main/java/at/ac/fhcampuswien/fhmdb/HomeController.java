@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -44,8 +45,8 @@ public class HomeController implements Initializable {
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
-        genreComboBox.getItems().addAll("All", "Action", "Comedy", "Drama", "Horror", "Mystery", "Romance", "Thriller");
-        genreComboBox.getSelectionModel().selectFirst();  // Select first item by default
+        genreComboBox.getItems().addAll("All", "Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Musical", "Mystery", "Romance", "Science Fiction", "Sport", "Thriller", "War", "Western");
+        genreComboBox.setPromptText("Filter by Genre");  // Select first item by default
 
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
@@ -53,8 +54,9 @@ public class HomeController implements Initializable {
             String selectedGenre = genreComboBox.getSelectionModel().getSelectedItem().toString();
             if (selectedGenre.equals("All")) {
                 // Show all movies
-                observableMovies.clear();
-                observableMovies.addAll(allMovies);
+                observableMovies.remove(allMovies);
+                observableMovies.setAll(allMovies);
+                //observableMovies.addAll(allMovies);
             } else {
                 // Filter movies by genre
                 ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
@@ -63,8 +65,9 @@ public class HomeController implements Initializable {
                         filteredMovies.add(movie);
                     }
                 }
-                observableMovies.clear();
-                observableMovies.addAll(filteredMovies);
+                observableMovies.remove(allMovies);
+                observableMovies.setAll(filteredMovies);
+
             }
         });
 
@@ -74,7 +77,7 @@ public class HomeController implements Initializable {
             if (searchText.isEmpty()) {
                 // field is empty = all movies
                 observableMovies.clear();
-                observableMovies.addAll(allMovies);
+                observableMovies.setAll(allMovies);
             } else {
                 //filter movies by title,description
                 ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
@@ -84,7 +87,7 @@ public class HomeController implements Initializable {
                     }
                 }
                 observableMovies.clear();
-                observableMovies.addAll(filteredMovies);
+                observableMovies.setAll(filteredMovies);
             }
         });
 
