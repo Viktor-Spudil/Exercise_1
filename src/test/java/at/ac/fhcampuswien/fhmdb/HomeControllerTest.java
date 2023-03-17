@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXComboBox;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class HomeControllerTest {
@@ -32,6 +33,20 @@ class HomeControllerTest {
             assertEquals("The Dark Knight", movie.getTitle());
         }
     }
+
+    @Test
+    void testTextAndGenreFilter() {
+        HomeController controller = new HomeController();
+        List<Movie> movies = Movie.initializeMovies();
+        List<Movie> filteredMovies = new ArrayList<>();
+        List<Movie> filteredMovies2 = new ArrayList<>();
+
+        filteredMovies.addAll(controller.textFilter("man",movies));
+        filteredMovies2.addAll(controller.genreFilter("Adventure",filteredMovies));
+
+        assertEquals(1, filteredMovies2.size());
+    }
+
 
     @Test
     void testSearchAll() {
