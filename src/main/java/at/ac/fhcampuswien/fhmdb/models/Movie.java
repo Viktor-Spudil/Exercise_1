@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Movie {
+public class Movie implements Comparable<Movie>{
     private String title;
     private String description;
     private List<String> genres = Genres.getValues();
@@ -111,5 +111,14 @@ public class Movie {
         movies.add(groundhogDay);
 
         return movies;
+    }
+
+    @Override
+    public int compareTo(Movie movie) {
+        return this.title.compareTo(movie.getTitle());
+    }
+
+    public boolean containsString(String substring) {
+        return String.format("%s %s", title, description).toLowerCase().contains(substring.toLowerCase());
     }
 }
