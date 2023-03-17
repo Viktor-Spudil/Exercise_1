@@ -84,33 +84,7 @@ public class HomeController implements Initializable {
 
             observableMovies.addAll(movieList);
 
-
-
         });
-
-        // Add event handler to search button
-       /*searchBtn.setOnAction(actionEvent -> {
-            String searchText = searchField.getText().toLowerCase().trim();
-            if (searchText.isEmpty()) {
-                // field is empty = all movies
-                observableMovies.clear();
-                observableMovies.setAll(allMovies);
-            } else {
-                //filter movies by title,description
-                ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
-                for (Movie movie : allMovies) {
-                    if (movie.getTitle().toLowerCase().contains(searchText) || movie.getDescription().toLowerCase().contains(searchText)) {
-                        filteredMovies.add(movie);
-                    }
-                }
-                observableMovies.clear();
-                observableMovies.setAll(filteredMovies);
-            }
-        });
-
-        */
-
-
 
         // Sort button
         sortBtn.setOnAction(actionEvent -> {
@@ -123,8 +97,8 @@ public class HomeController implements Initializable {
             }
         });
 
-
     }
+
     public List<Movie> genreFilter(String genre, List<Movie> movies) {
         List<Movie> movieList = new ArrayList<>();
 
