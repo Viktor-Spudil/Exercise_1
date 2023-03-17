@@ -1,11 +1,11 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import at.ac.fhcampuswien.fhmdb.controller.HomeController;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import com.jfoenix.controls.JFXComboBox;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 class HomeControllerTest {

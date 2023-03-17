@@ -1,8 +1,8 @@
-package at.ac.fhcampuswien.fhmdb;
+package at.ac.fhcampuswien.fhmdb.controller;
 
 import at.ac.fhcampuswien.fhmdb.models.Genres;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
-import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
+import at.ac.fhcampuswien.fhmdb.view.MovieCell;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
