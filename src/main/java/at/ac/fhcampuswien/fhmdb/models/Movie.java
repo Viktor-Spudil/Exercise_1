@@ -7,7 +7,7 @@ public class Movie {
     private String title;
     private String description;
     // TODO add more properties here
-    private List<String> genres = new ArrayList<>();
+    private List<String> genres = Genres.getValues();
 
     public Movie(String title, String description, List<String> genres) {
         this.title = title;
@@ -27,38 +27,47 @@ public class Movie {
         return genres;
     }
 
-    public static List<Movie> initializeMovies(){
-        List<Movie> movies = new ArrayList<>();
-        List<String> genres1 = new ArrayList<>();
-        genres1.add("Action");
-        genres1.add("Thriller");
-        genres1.add("Adventure");
 
-        Movie movie1 = new Movie("A: The Dark Knight", "A: description", genres1);
+
+    public static List<Movie> initializeMovies(){
+
+        List<Movie> movies = new ArrayList<>();
+
+
+        List<String> theDarkKnightGenre = new ArrayList<>();
+        theDarkKnightGenre.add("Action");
+        theDarkKnightGenre.add("Thriller");
+        theDarkKnightGenre.add("Adventure");
+
+        List<String> avengersGenre = new ArrayList<>();
+        avengersGenre.add("Comedy");
+        avengersGenre.add("Romance");
+        avengersGenre.add("Drama");
+
+        List<String> theShawshankRedemptionGenre = new ArrayList<>();
+        theShawshankRedemptionGenre.add("Drama");
+        theShawshankRedemptionGenre.add("Mystery");
+        theShawshankRedemptionGenre.add("Thriller");
+
+        List<String> russiaMotherGenre = new ArrayList<>();
+        russiaMotherGenre.add("Horror");
+        russiaMotherGenre.add("Mystery");
+        russiaMotherGenre.add("Thriller");
+
+
+        Movie movie1 = new Movie("A: The Dark Knight", "This is a movie", theDarkKnightGenre);
         movies.add(movie1);
 
-        List<String> genres2 = new ArrayList<>();
-        genres2.add("Comedy");
-        genres2.add("Romance");
-        genres2.add("Drama");
 
-        Movie movie2 = new Movie("B: Avengers", "B: description", genres2);
+        Movie movie2 = new Movie("B: Avengers", "B: description", avengersGenre);
         movies.add(movie2);
 
-        List<String> genres3 = new ArrayList<>();
-        genres3.add("Drama");
-        genres3.add("Mystery");
-        genres3.add("Thriller");
 
-        Movie movie3 = new Movie("C: The Shawshank Redemption", "C: description", genres3);
+        Movie movie3 = new Movie("C: The Shawshank Redemption", "C: description", theShawshankRedemptionGenre);
         movies.add(movie3);
 
-        List<String> genres4 = new ArrayList<>();
-        genres4.add("Horror");
-        genres4.add("Mystery");
-        genres4.add("Thriller");
 
-        Movie movie4 = new Movie("D: Russia mother", "D: description", genres4);
+        Movie movie4 = new Movie("D: Russia mother", "D: description", russiaMotherGenre);
         movies.add(movie4);
 
         return movies;
