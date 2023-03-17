@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class HomeControllerTest {
+public class HomeControllerTest {
     public List<Movie> allMovies = Movie.initializeMovies();
 
     @Test

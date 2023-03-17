@@ -4,7 +4,6 @@ module at.ac.fhcampuswien.fhmdb {
 
     requires com.jfoenix;
 
-    opens at.ac.fhcampuswien.fhmdb to javafx.fxml;
     exports at.ac.fhcampuswien.fhmdb;
     exports at.ac.fhcampuswien.fhmdb.controller;
     opens at.ac.fhcampuswien.fhmdb.controller to javafx.fxml;
