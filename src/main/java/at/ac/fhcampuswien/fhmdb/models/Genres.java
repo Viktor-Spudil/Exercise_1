@@ -49,5 +49,8 @@ public enum Genres {
         return Collections.unmodifiableList(allGenres);
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

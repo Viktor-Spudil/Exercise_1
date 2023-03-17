@@ -80,7 +80,7 @@ public class HomeController implements Initializable {
             } else if (!genreComboBox.getValue().toString().equals("All") && !searchField.getText().isEmpty()) {
                 observableMovies.clear();
                 movieList = genreFilter(genreComboBox.getValue().toString(), allMovies);
-                movieList = textFilter(searchField.getText(), allMovies);
+                movieList = textFilter(searchField.getText(), movieList);
             }
 
             movieListView.refresh();

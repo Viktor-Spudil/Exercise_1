@@ -6,7 +6,6 @@ import java.util.List;
 public class Movie {
     private String title;
     private String description;
-    // TODO add more properties here
     private List<String> genres = Genres.getValues();
 
     public Movie(String title, String description, List<String> genres) {
