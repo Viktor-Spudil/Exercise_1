@@ -44,6 +44,7 @@ class HomeControllerTest {
         assertEquals(allMovies, filteredMovies);
     }
 
+    @Test
     void testFilterAll() {
         HomeController controller = new HomeController();
         controller.genreComboBox = new JFXComboBox();
