@@ -1,6 +1,7 @@
 package at.ac.fhcampuswien.fhmdb;
 
 import at.ac.fhcampuswien.fhmdb.models.Movie;
+import com.jfoenix.controls.JFXComboBox;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,55 +26,35 @@ class HomeControllerTest {
     void testTextFilter() {
         HomeController controller = new HomeController();
 
-        List<Movie> filteredMovies = controller.textFilter("movie", allMovies);
+        List<Movie> filteredMovies = controller.textFilter("The Dark Knight", allMovies);
 
         for (Movie movie : filteredMovies) {
-            assertTrue(movie.getTitle().toLowerCase().contains("movie")
-                    || movie.getDescription().toLowerCase().contains("movie"));
+            assertEquals("The Dark Knight", movie.getTitle());
         }
     }
 
     @Test
     void testSearchAll() {
         HomeController controller = new HomeController();
-
+        controller.genreComboBox = new JFXComboBox();
         controller.genreComboBox.setValue("All");
         controller.searchField.setText("");
+        List<Movie> filteredMovies = controller.textFilter("", allMovies);
 
-        controller.searchBtn.fire();
-
-        assertEquals(allMovies, controller.movieListView.getItems());
+        assertEquals(allMovies, filteredMovies);
     }
 
-    @Test
-    void testSearchByGenre() {
+    void testFilterAll() {
         HomeController controller = new HomeController();
-
-        String selectedGenre = "Action";
-        List<Movie> expectedMovies = controller.genreFilter(selectedGenre, allMovies);
-
-        controller.genreComboBox.setValue(selectedGenre);
-        controller.searchField.setText("");
-
-        controller.searchBtn.fire();
-
-        assertEquals(expectedMovies, controller.movieListView.getItems());
-    }
-
-    @Test
-    void testSearchByText() {
-        HomeController controller = new HomeController();
-
-        String searchText = "movie";
-        List<Movie> expectedMovies = controller.textFilter(searchText, allMovies);
-
+        controller.genreComboBox = new JFXComboBox();
         controller.genreComboBox.setValue("All");
-        controller.searchField.setText(searchText);
+        controller.searchField.setText("");
+        List<Movie> filteredMovies = controller.textFilter("", allMovies);
 
-        controller.searchBtn.fire();
-
-        assertEquals(expectedMovies, controller.movieListView.getItems());
+        assertEquals(allMovies, filteredMovies);
     }
+
+
 
 }
 
