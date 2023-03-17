@@ -14,7 +14,6 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ArrayList;
-import at.ac.fhcampuswien.fhmdb.models.Genres;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -55,37 +54,46 @@ public class HomeController implements Initializable {
 
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
-        genreComboBox.setOnAction(actionEvent -> {
+        searchBtn.setOnAction(actionEvent -> {
 
-                    observableMovies.clear();
-                    List<Movie> movieList = null;
+            observableMovies.clear();
+            List<Movie> movieList = null;
+            String selectedGenre;
 
-                    //Search field is empty and All is selected
-                    if (genreComboBox.getSelectionModel().getSelectedItem().toString().equals("All") && searchField.getText().isEmpty()) {
-                        // Show all movies
-                        movieList = allMovies;
+            //Search field is empty and All is selected
+            if (genreComboBox.getValue().toString().equals("All") && searchField.getText().isEmpty()) {
+                // Show all movies
+                observableMovies.clear();
+                movieList = allMovies;
 
-                        //Search field is empty and a genre is selected
-                    } else if (!genreComboBox.getSelectionModel().getSelectedItem().toString().equals("All") && searchField.getText().isEmpty()) {
-                        movieList = genreFilter(genreComboBox.getValue().toString(), allMovies);
+                //Search field is empty and a genre is selected
+            } else if (!genreComboBox.getValue().toString().equals("All") && searchField.getText().isEmpty()) {
+                observableMovies.clear();
+                movieList = genreFilter(genreComboBox.getValue().toString(), allMovies);
 
-                        //Search field is not empty and All is selected
-                    } else if (genreComboBox.getSelectionModel().getSelectedItem().toString().equals("All") && !searchField.getText().isEmpty()) {
-                        movieList = textFilter(searchField.getText(), allMovies);
+                //Search field is not empty and All is selected
+            } else if (genreComboBox.getValue().toString().equals("All") && !searchField.getText().isEmpty()) {
+                observableMovies.clear();
+                movieList = textFilter(searchField.getText(), allMovies);
 
-                        //Search field is not empty and genre is selected
-                    } else if (!genreComboBox.getSelectionModel().getSelectedItem().toString().equals("All") && !searchField.getText().isEmpty()) {
-                        movieList = genreFilter(genreComboBox.getValue().toString(), allMovies);
-                        movieList = textFilter(searchField.getText(), allMovies);
-                    }
+                //Search field is not empty and genre is selected
+            } else if (!genreComboBox.getValue().toString().equals("All") && !searchField.getText().isEmpty()) {
+                observableMovies.clear();
+                movieList = genreFilter(genreComboBox.getValue().toString(), allMovies);
+                movieList = textFilter(searchField.getText(), allMovies);
+            }
+
+            movieListView.refresh();
 
             observableMovies.addAll(movieList);
+
+
 
 
         });
 
         // Add event handler to search button
-        searchBtn.setOnAction(actionEvent -> {
+       /*searchBtn.setOnAction(actionEvent -> {
             String searchText = searchField.getText().toLowerCase().trim();
             if (searchText.isEmpty()) {
                 // field is empty = all movies
@@ -104,16 +112,16 @@ public class HomeController implements Initializable {
             }
         });
 
+        */
 
 
-        // Sort button example:
+
+        // Sort button
         sortBtn.setOnAction(actionEvent -> {
             if (sortBtn.getText().equals("Sort (asc)")) {
-                // TODO sort observableMovies ascending
                 observableMovies.sort((o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
                 sortBtn.setText("Sort (desc)");
             } else {
-                // TODO sort observableMovies descending
                 observableMovies.sort((o1, o2) -> o2.getTitle().compareTo(o1.getTitle()));
                 sortBtn.setText("Sort (asc)");
             }
