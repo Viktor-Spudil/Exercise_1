@@ -3,6 +3,7 @@ package at.ac.fhcampuswien.fhmdb.models;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Movie {
     private String title;
     private String description;
@@ -26,48 +27,88 @@ public class Movie {
         return genres;
     }
 
-
-
     public static List<Movie> initializeMovies(){
 
         List<Movie> movies = new ArrayList<>();
 
-
+        // Add genres to movies
         List<String> theDarkKnightGenre = new ArrayList<>();
         theDarkKnightGenre.add("Action");
         theDarkKnightGenre.add("Thriller");
         theDarkKnightGenre.add("Adventure");
 
-        List<String> avengersGenre = new ArrayList<>();
-        avengersGenre.add("Comedy");
-        avengersGenre.add("Romance");
-        avengersGenre.add("Drama");
+        List<String> starWarsGenre = new ArrayList<>();
+        starWarsGenre.add("Action");
+        starWarsGenre.add("Adventure");
+        starWarsGenre.add("Science Fiction");
 
-        List<String> theShawshankRedemptionGenre = new ArrayList<>();
-        theShawshankRedemptionGenre.add("Drama");
-        theShawshankRedemptionGenre.add("Mystery");
-        theShawshankRedemptionGenre.add("Thriller");
+        List<String> forrestGumpGenre = new ArrayList<>();
+        forrestGumpGenre.add("Comedy");
+        forrestGumpGenre.add("Drama");
+        forrestGumpGenre.add("Romance");
 
-        List<String> russiaMotherGenre = new ArrayList<>();
-        russiaMotherGenre.add("Horror");
-        russiaMotherGenre.add("Mystery");
-        russiaMotherGenre.add("Thriller");
+        List<String> silenceOfTheLambsGenre = new ArrayList<>();
+        silenceOfTheLambsGenre.add("Crime");
+        silenceOfTheLambsGenre.add("Drama");
+        silenceOfTheLambsGenre.add("Thriller");
 
+        List<String> matrixGenre = new ArrayList<>();
+        matrixGenre.add("Action");
+        matrixGenre.add("Science Fiction");
 
-        Movie movie1 = new Movie("A: The Dark Knight", "This is a movie", theDarkKnightGenre);
-        movies.add(movie1);
+        List<String> lionKingGenre = new ArrayList<>();
+        lionKingGenre.add("Animation");
+        lionKingGenre.add("Adventure");
+        lionKingGenre.add("Drama");
 
+        List<String> jawsGenre = new ArrayList<>();
+        jawsGenre.add("Adventure");
+        jawsGenre.add("Drama");
+        jawsGenre.add("Thriller");
 
-        Movie movie2 = new Movie("B: Avengers", "B: description", avengersGenre);
-        movies.add(movie2);
+        List<String> theShiningGenre = new ArrayList<>();
+        theShiningGenre.add("Drama");
+        theShiningGenre.add("Horror");
 
+        List<String> jurassicParkGenre = new ArrayList<>();
+        jurassicParkGenre.add("Adventure");
+        jurassicParkGenre.add("Thriller");
 
-        Movie movie3 = new Movie("C: The Shawshank Redemption", "C: description", theShawshankRedemptionGenre);
-        movies.add(movie3);
+        List<String> groundhogDayGenre = new ArrayList<>();
+        groundhogDayGenre.add("Comedy");
+        groundhogDayGenre.add("Fantasy");
+        groundhogDayGenre.add("Romance");
 
+        // Generate movies
+        Movie darkKnight = new Movie("The Dark Knight", "A vigilante fights crime and corruption in Gotham City.", theDarkKnightGenre);
+        movies.add(darkKnight);
 
-        Movie movie4 = new Movie("D: Russia mother", "D: description", russiaMotherGenre);
-        movies.add(movie4);
+        Movie starWars = new Movie("Star Wars: Episode IV - A New Hope", "A farm boy joins a rebel alliance to save the galaxy from an evil empire.", starWarsGenre);
+        movies.add(starWars);
+
+        Movie forrestGump = new Movie("Forrest Gump", "A man with a low IQ accomplishes great things in his life.", forrestGumpGenre);
+        movies.add(forrestGump);
+
+        Movie silenceOfTheLambs = new Movie("The Silence of the Lambs", "An FBI trainee seeks the help of a psychopathic prisoner to catch a serial killer.", silenceOfTheLambsGenre);
+        movies.add(silenceOfTheLambs);
+
+        Movie matrix = new Movie("The Matrix", "A hacker discovers a shocking truth about the reality he lives in.", matrixGenre);
+        movies.add(matrix);
+
+        Movie lionKing = new Movie("The Lion King", "A young lion prince must overthrow his uncle to reclaim his rightful place as king.", lionKingGenre);
+        movies.add(lionKing);
+
+        Movie jaws = new Movie("Jaws", "A police chief, a marine biologist, and a fisherman hunt a great white shark.", jawsGenre);
+        movies.add(jaws);
+
+        Movie shining = new Movie("The Shining", "A family caretaker experiences supernatural occurrences at an isolated hotel.", theShiningGenre);
+        movies.add(shining);
+
+        Movie jurassicPark = new Movie("Jurassic Park", "A billionaire invites a team of scientists to his theme park filled with cloned dinosaurs.", jurassicParkGenre);
+        movies.add(jurassicPark);
+
+        Movie groundhogDay = new Movie("Groundhog Day", "A weatherman relives the same day over and over again.", groundhogDayGenre);
+        movies.add(groundhogDay);
 
         return movies;
     }
