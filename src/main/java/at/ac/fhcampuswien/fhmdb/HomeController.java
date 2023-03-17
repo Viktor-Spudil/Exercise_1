@@ -58,7 +58,6 @@ public class HomeController implements Initializable {
 
             observableMovies.clear();
             List<Movie> movieList = null;
-            String selectedGenre;
 
             //Search field is empty and All is selected
             if (genreComboBox.getValue().toString().equals("All") && searchField.getText().isEmpty()) {
@@ -83,10 +82,7 @@ public class HomeController implements Initializable {
                 movieList = textFilter(searchField.getText(), movieList);
             }
 
-            movieListView.refresh();
-
             observableMovies.addAll(movieList);
-
 
 
 
