@@ -3,122 +3,80 @@ package at.ac.fhcampuswien.fhmdb.models;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class Movie implements Comparable<Movie>{
+public class Movie implements Comparable<Movie> {
+    // === 0. NOTES ===
+    // === 1. CLASS VARIABLES ===
+    // === 2. OBJECT VARIABLES ===
     private String title;
     private String description;
-    private List<String> genres = Genres.getValues();
+    // TODO add more properties here
+    private List<Genre> genres;
 
-    public Movie(String title, String description, List<String> genres) {
+
+    // === 3. CONSTRUCTORS ===
+    // --- 3.1 STATIC BLOCKS ---
+    // --- 3.2 INSTANCE INITIALIZER ---
+    // --- 3.3 REAL CONSTRUCTORS ---
+    public Movie(String title, String description, List<Genre> genres) {
         this.title = title;
         this.description = description;
         this.genres = genres;
-    }
+    }//end public Movie(String title, String description, List<Genre> genres)
 
+
+    // === 4. STATIC METHODS ===
+    // === 5. GETTER AND SETTER ===
     public String getTitle() {
-        return title;
-    }
+        return this.title;
+    }//end public String getTitle()
 
     public String getDescription() {
-        return description;
-    }
+        return this.description;
+    }//end public String getDescription()
 
-    public List<String> getGenres() {
-        return genres;
-    }
+    public List<Genre> getGenres() {
+        return this.genres;
+    }//end public List<Genre> getGenres()
 
-    public static List<Movie> initializeMovies(){
 
+    // === 6. MISCELLANEOUS OBJECT METHODS ===
+    public static List<Movie> initializeMovies() {
         List<Movie> movies = new ArrayList<>();
 
-        // Add genres to movies
-        List<String> theDarkKnightGenre = new ArrayList<>();
-        theDarkKnightGenre.add("Action");
-        theDarkKnightGenre.add("Thriller");
-        theDarkKnightGenre.add("Adventure");
 
-        List<String> starWarsGenre = new ArrayList<>();
-        starWarsGenre.add("Action");
-        starWarsGenre.add("Adventure");
-        starWarsGenre.add("Science Fiction");
+        // TODO add some dummy data here
+        List<Genre> genres1 = new ArrayList<>();
+        genres1.add(Genre.HISTORY);
+        genres1.add(Genre.BIOGRAPHY);
+        movies.add(new Movie("FilmA", "Description filmA", genres1));
 
-        List<String> forrestGumpGenre = new ArrayList<>();
-        forrestGumpGenre.add("Comedy");
-        forrestGumpGenre.add("Drama");
-        forrestGumpGenre.add("Romance");
+        List<Genre> genres2 = new ArrayList<>();
+        genres2.add(Genre.WAR);
+        genres2.add(Genre.ACTION);
+        movies.add(new Movie("FilmB", "Description filmB", genres2));
 
-        List<String> silenceOfTheLambsGenre = new ArrayList<>();
-        silenceOfTheLambsGenre.add("Crime");
-        silenceOfTheLambsGenre.add("Drama");
-        silenceOfTheLambsGenre.add("Thriller");
+        List<Genre> genres3 = new ArrayList<>();
+        genres3.add(Genre.ROMANCE);
+        genres3.add(Genre.COMEDY);
+        movies.add(new Movie("FilmC", "Description filmC", genres3));
 
-        List<String> matrixGenre = new ArrayList<>();
-        matrixGenre.add("Action");
-        matrixGenre.add("Science Fiction");
-
-        List<String> lionKingGenre = new ArrayList<>();
-        lionKingGenre.add("Animation");
-        lionKingGenre.add("Adventure");
-        lionKingGenre.add("Drama");
-
-        List<String> jawsGenre = new ArrayList<>();
-        jawsGenre.add("Adventure");
-        jawsGenre.add("Drama");
-        jawsGenre.add("Thriller");
-
-        List<String> theShiningGenre = new ArrayList<>();
-        theShiningGenre.add("Drama");
-        theShiningGenre.add("Horror");
-
-        List<String> jurassicParkGenre = new ArrayList<>();
-        jurassicParkGenre.add("Adventure");
-        jurassicParkGenre.add("Thriller");
-
-        List<String> groundhogDayGenre = new ArrayList<>();
-        groundhogDayGenre.add("Comedy");
-        groundhogDayGenre.add("Fantasy");
-        groundhogDayGenre.add("Romance");
-
-        // Generate movies
-        Movie darkKnight = new Movie("The Dark Knight", "A vigilante fights crime and corruption in Gotham City.", theDarkKnightGenre);
-        movies.add(darkKnight);
-
-        Movie starWars = new Movie("Star Wars: Episode IV - A New Hope", "A farm boy joins a rebel alliance to save the galaxy from an evil empire.", starWarsGenre);
-        movies.add(starWars);
-
-        Movie forrestGump = new Movie("Forrest Gump", "A man with a low IQ accomplishes great things in his life.", forrestGumpGenre);
-        movies.add(forrestGump);
-
-        Movie silenceOfTheLambs = new Movie("The Silence of the Lambs", "An FBI trainee seeks the help of a psychopathic prisoner to catch a serial killer.", silenceOfTheLambsGenre);
-        movies.add(silenceOfTheLambs);
-
-        Movie matrix = new Movie("The Matrix", "A hacker discovers a shocking truth about the reality he lives in.", matrixGenre);
-        movies.add(matrix);
-
-        Movie lionKing = new Movie("The Lion King", "A young lion prince must overthrow his uncle to reclaim his rightful place as king.", lionKingGenre);
-        movies.add(lionKing);
-
-        Movie jaws = new Movie("Jaws", "A police chief, a marine biologist, and a fisherman hunt a great white shark.", jawsGenre);
-        movies.add(jaws);
-
-        Movie shining = new Movie("The Shining", "A family caretaker experiences supernatural occurrences at an isolated hotel.", theShiningGenre);
-        movies.add(shining);
-
-        Movie jurassicPark = new Movie("Jurassic Park", "A billionaire invites a team of scientists to his theme park filled with cloned dinosaurs.", jurassicParkGenre);
-        movies.add(jurassicPark);
-
-        Movie groundhogDay = new Movie("Groundhog Day", "A weatherman relives the same day over and over again.", groundhogDayGenre);
-        movies.add(groundhogDay);
+        List<Genre> genres4 = new ArrayList<>();
+        genres4.add(Genre.DOCUMENTARY);
+        genres4.add(Genre.FAMILY);
+        movies.add(new Movie("FilmD", "Description filmD", genres4));
 
         return movies;
-    }
+    }//end public static List<Movie> initializeMovies()
 
     @Override
     public int compareTo(Movie movie) {
         return this.title.compareTo(movie.getTitle());
-    }
+    }//end public int compareTo(Movie movie)
 
     public boolean containsString(String substring) {
         return String.format("%s %s", title, description).toLowerCase().contains(substring.toLowerCase());
-    }
-}
+    }//end public boolean containsSubstring(String substring)
+
+
+    // === 7. MAIN ===
+}//end public class Movie implements Comparable<Movie>
