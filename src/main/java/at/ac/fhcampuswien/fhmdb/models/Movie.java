@@ -74,7 +74,7 @@ public class Movie implements Comparable<Movie> {
     }//end public int compareTo(Movie movie)
 
     public boolean containsString(String substring) {
-        return String.format("%s %s", title, description).toLowerCase().contains(substring.toLowerCase());
+        return (title + description).toLowerCase().contains(substring.toLowerCase());
     }//end public boolean containsSubstring(String substring)
 
 

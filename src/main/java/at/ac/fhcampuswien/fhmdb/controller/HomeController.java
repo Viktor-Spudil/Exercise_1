@@ -1,6 +1,6 @@
 package at.ac.fhcampuswien.fhmdb.controller;
 
-import at.ac.fhcampuswien.fhmdb.models.Genres;
+import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import at.ac.fhcampuswien.fhmdb.view.MovieCell;
 import com.jfoenix.controls.JFXButton;
@@ -13,9 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class HomeController implements Initializable {
     @FXML
@@ -35,8 +33,6 @@ public class HomeController implements Initializable {
 
     public List<Movie> allMovies = Movie.initializeMovies();
 
-    public List<String> allGenres = Genres.getValues();
-
     private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
     @Override
@@ -48,80 +44,62 @@ public class HomeController implements Initializable {
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
-        genreComboBox.getItems().add("All");
-        genreComboBox.getItems().addAll(allGenres);
         genreComboBox.setPromptText("Filter by Genre");  // Select first item by default
+        genreComboBox.getItems().add("All");
+        genreComboBox.getItems().addAll(Genre.values());
+
 
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
-        searchBtn.setOnAction(actionEvent -> {
 
-            observableMovies.clear();
-            List<Movie> movieList = null;
-
-            //Search field is empty and All is selected
-            if (genreComboBox.getValue().toString().equals("All") && searchField.getText().isEmpty()) {
-                // Show all movies
-                observableMovies.clear();
-                movieList = allMovies;
-
-                //Search field is empty and a genre is selected
-            } else if (!genreComboBox.getValue().toString().equals("All") && searchField.getText().isEmpty()) {
-                observableMovies.clear();
-                movieList = genreFilter(genreComboBox.getValue().toString(), allMovies);
-
-                //Search field is not empty and All is selected
-            } else if (genreComboBox.getValue().toString().equals("All") && !searchField.getText().isEmpty()) {
-                observableMovies.clear();
-                movieList = textFilter(searchField.getText(), allMovies);
-
-                //Search field is not empty and genre is selected
-            } else if (!genreComboBox.getValue().toString().equals("All") && !searchField.getText().isEmpty()) {
-                observableMovies.clear();
-                movieList = genreFilter(genreComboBox.getValue().toString(), allMovies);
-                movieList = textFilter(searchField.getText(), movieList);
-            }
-
-            observableMovies.addAll(movieList);
-
-        });
-
-        // Sort button
+        // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
             if (sortBtn.getText().equals("Sort (asc)")) {
-                observableMovies.sort((o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
+                Collections.sort(observableMovies);
                 sortBtn.setText("Sort (desc)");
             } else {
-                observableMovies.sort((o1, o2) -> o2.getTitle().compareTo(o1.getTitle()));
+                Collections.reverse(observableMovies);
                 sortBtn.setText("Sort (asc)");
             }
-        });
+        });//end sortBtn.setOnAction(actionEvent ->
 
-    }
+        // Search button:
+        searchBtn.setOnAction(actionEvent -> {
+            String query = searchField.getText();
+            List<Movie> filteredMovies = new LinkedList<>();
 
-    public List<Movie> genreFilter(String genre, List<Movie> movies) {
-        List<Movie> movieList = new ArrayList<>();
+            if (query.isBlank() && (genreComboBox.getValue().toString() == "All")) {
+                observableMovies.clear();
+                observableMovies.addAll(allMovies);
+            }
+            else {
+                filteredMovies = filterByQuery(allMovies, query);
+            }
 
-        for (Movie movie : movies) {
-            if(movie.getGenres().contains(genre)) {
-                movieList.add(movie);
+        });//end sortBtn.setOnAction(actionEvent ->
+    }//end public void initialize(URL url, ResourceBundle resourceBundle)
+
+    public List<Movie> filterByQuery(List<Movie> moviesToFilter, String query) {
+        List<Movie> filteredMovieList = new LinkedList<>();
+
+        for (Movie movie : moviesToFilter) {
+            if (movie.containsString(query)) {
+                filteredMovieList.add(movie);
             }
         }
-        return movieList;
-    }
 
-    public List<Movie> textFilter(String someText, List<Movie> movies) {
-        List<Movie> movieList = new ArrayList<>();
-        someText = someText.toLowerCase();
+        return filteredMovieList;
+    }//end public List<Movie> filterByQuery(List<Movie> moviesToFilter, String query)
 
-        for(Movie movie : movies) {
-            if(movie.getTitle().toLowerCase().contains(someText)){
-                movieList.add(movie);
-            } else if (movie.getDescription().toLowerCase().contains(someText)) {
-                movieList.add(movie);
+    public List<Movie> filterByGenre(List<Movie> moviesToFilter, Genre genre) {
+        List<Movie> filteredMovieList = new LinkedList<>();
+
+        for (Movie movie: moviesToFilter) {
+            if (movie.getGenres().contains(genre)) {
+                filteredMovieList.add(movie);
             }
         }
-        return movieList;
-    }
 
-}
+        return filteredMovieList;
+    }//end public List<Movie> filterByGenre(List<Movie> moviesToFilter, Genre genre)
+}//end public class HomeController implements Initializable
