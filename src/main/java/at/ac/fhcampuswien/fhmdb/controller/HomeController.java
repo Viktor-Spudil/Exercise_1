@@ -45,7 +45,7 @@ public class HomeController implements Initializable {
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");  // Select first item by default
-        genreComboBox.getItems().add("All");
+        genreComboBox.getItems().add("ALL");
         genreComboBox.getItems().addAll(Genre.values());
 
 
@@ -66,14 +66,31 @@ public class HomeController implements Initializable {
         // Search button:
         searchBtn.setOnAction(actionEvent -> {
             String query = searchField.getText();
-            List<Movie> filteredMovies = new LinkedList<>();
+            List<Movie> filteredMovies;
 
-            if (query.isBlank() && (genreComboBox.getValue().toString() == "All")) {
-                observableMovies.clear();
-                observableMovies.addAll(allMovies);
+            if (query.isBlank()) {
+                if (genreComboBox.getValue() == "ALL") {
+                    observableMovies.clear();
+                    observableMovies.addAll(allMovies);
+                }
+                else {
+                    filteredMovies = filterByGenre(allMovies, (Genre) genreComboBox.getValue());
+                    observableMovies.clear();
+                    observableMovies.addAll(filteredMovies);
+                }
             }
             else {
-                filteredMovies = filterByQuery(allMovies, query);
+                if (genreComboBox.getValue() == "ALL") {
+                    filteredMovies = filterByQuery(allMovies, query);
+                    observableMovies.clear();
+                    observableMovies.addAll(filteredMovies);
+                }
+                else {
+                    filteredMovies = filterByQuery(allMovies, query);
+                    filteredMovies = filterByGenre(filteredMovies, (Genre) genreComboBox.getValue());
+                    observableMovies.clear();
+                    observableMovies.addAll(filteredMovies);
+                }
             }
 
         });//end sortBtn.setOnAction(actionEvent ->
@@ -87,7 +104,6 @@ public class HomeController implements Initializable {
                 filteredMovieList.add(movie);
             }
         }
-
         return filteredMovieList;
     }//end public List<Movie> filterByQuery(List<Movie> moviesToFilter, String query)
 
@@ -99,7 +115,6 @@ public class HomeController implements Initializable {
                 filteredMovieList.add(movie);
             }
         }
-
         return filteredMovieList;
     }//end public List<Movie> filterByGenre(List<Movie> moviesToFilter, Genre genre)
 }//end public class HomeController implements Initializable
